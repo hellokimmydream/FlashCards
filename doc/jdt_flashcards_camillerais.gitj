@@ -4,5 +4,56 @@
   "branch": "main",
   "me": "hellokimmydream",
   "journalStartDate": "2026-01-14T13:25:00.000Z",
-  "exceptions": []
+  "exceptions": [
+    {
+      "id": "946869a8-eed7-40be-9b4f-3dc1b7e06536",
+      "type": "commitless",
+      "name": "chore(départ projet)",
+      "description": "Recu explication et présentation du projet FlashCards",
+      "date": "2026-01-14T13:20",
+      "duration": 15,
+      "status": "Done",
+      "author": "hellokimmydream"
+    },
+    {
+      "id": "8c62b4ef-73cc-49cf-a776-279120e7b611",
+      "type": "commitless",
+      "name": "chore(cdc)",
+      "description": "analyse du cdc avec professeur",
+      "date": "2026-01-14T12:35:00.000Z",
+      "duration": 10,
+      "status": "Done",
+      "author": "hellokimmydream"
+    },
+    {
+      "id": "41eeb403-dace-413b-b6c6-48a6043fe8c8",
+      "type": "commitless",
+      "name": "chore(démarrage, cdc)",
+      "description": "Réalisation du point 7.5\r\ninstallation adonis\r\nsrc\r\nparlé de migration / seeder",
+      "date": "2026-01-14T12:45:00.000Z",
+      "duration": 80,
+      "status": "Done",
+      "author": "hellokimmydream"
+    },
+    {
+      "id": "f1a2dd5d-923e-40d8-813a-7c88e8ad5803",
+      "type": "commitless",
+      "name": "chore(ORM)",
+      "description": "recu explication ORM / Routes Template Edge",
+      "date": "2026-01-14T13:15:00.000Z",
+      "duration": 15,
+      "status": "Done",
+      "author": "hellokimmydream"
+    },
+    {
+      "id": "aeda9ab7-80c2-4133-b802-46c80c9daf6c",
+      "type": "commitless",
+      "name": "chore(JDT)",
+      "description": "Installation du JDT\r\ncréation d'un token git\r\nMise a jour et tenue du JDT",
+      "date": "2026-01-14T13:40:00.000Z",
+      "duration": 10,
+      "status": "Done",
+      "author": "hellokimmydream"
+    }
+  ]
 }
