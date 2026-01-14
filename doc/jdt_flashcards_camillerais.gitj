@@ -54,6 +54,16 @@
       "duration": 10,
       "status": "Done",
       "author": "hellokimmydream"
+    },
+    {
+      "id": "6270d00f-f7e2-4e9c-b7d8-8034f707fa1c",
+      "type": "commitless",
+      "name": "chore(backlog)",
+      "description": "création des backlog 1 selon analyse fonctionnel ",
+      "date": "2026-01-14T14:46:00.000Z",
+      "duration": 15,
+      "status": "Done",
+      "author": "hellokimmydream"
     }
   ]
 }
