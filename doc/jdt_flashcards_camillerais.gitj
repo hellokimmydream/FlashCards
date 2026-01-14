@@ -64,6 +64,19 @@
       "duration": 15,
       "status": "Done",
       "author": "hellokimmydream"
+    },
+    {
+      "id": "5ab1f4b5-d3f5-4446-866c-da61f98ab9f7",
+      "type": "commitpatch",
+      "sha": "5cf1da1490f962bb48a4788682429fcf5c279910",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/5cf1da1490f962bb48a4788682429fcf5c279910",
+      "name": "feat(step1)",
+      "description": "fichier css ok",
+      "date": "2026-01-14T15:05:00.000Z",
+      "duration": 10,
+      "status": "WIP",
+      "author": "hellokimmydream",
+      "patch": true
     }
   ]
 }
