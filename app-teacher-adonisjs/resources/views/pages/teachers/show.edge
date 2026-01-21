@@ -22,9 +22,21 @@
       <a href="#">
         <img height="20em" src="/img/edit.png" alt="edit" />
       </a>
-      <a href="#">
-        <img height="20em" src="/img/delete.png" alt="delete" />
+      <form
+        action="{{ route('teacher.destroy', {id: teacher.id}) }}?
+              _method=DELETE"
+        method="POST"
+        style="display: inline"
+      >
+        {{ csrfField() }}
+              <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+          <img height="20em" src="/img/delete.png" alt="delete" />
+        </button>
+      </form>
+      <a href="{{ route('teacher.show', {id: teacher.id}) }}">
+        <img height="20em" src="/img/detail.png" alt="detail" />
       </a>
+
     </div>
   </div>
   <div class="user-body">
