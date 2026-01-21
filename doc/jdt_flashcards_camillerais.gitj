@@ -77,6 +77,32 @@
       "status": "WIP",
       "author": "hellokimmydream",
       "patch": true
+    },
+    {
+      "id": "0b3da6ce-7434-43aa-8cf8-04cc2cc4c021",
+      "type": "commitpatch",
+      "sha": "6fdb093b07a1bfda9b9f1049612e1ba55487d059",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/6fdb093b07a1bfda9b9f1049612e1ba55487d059",
+      "name": "chore(step0)",
+      "description": "génère le projet de départ",
+      "date": "2026-01-14T13:35:00.000Z",
+      "duration": 5,
+      "status": "Done",
+      "author": "hellokimmydream",
+      "patch": true
+    },
+    {
+      "id": "ad35aaef-b448-4d7f-9fae-af203b82b9fa",
+      "type": "commitpatch",
+      "sha": "11e71ebb5339a37c8db11fa73f3ddb68b567bc3c",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/11e71ebb5339a37c8db11fa73f3ddb68b567bc3c",
+      "name": "chore(jdt)",
+      "description": "Tenue du journal de travail",
+      "date": "2026-01-14T14:35:00.000Z",
+      "duration": 5,
+      "status": "Done",
+      "author": "hellokimmydream",
+      "patch": true
     }
   ]
 }
