@@ -1,4 +1,6 @@
+import Teacher from '#models/teacher'
 import type { HttpContext } from '@adonisjs/core/http'
+import { dd } from '@adonisjs/core/services/dumper'
 
 export default class TeachersController {
   /**
@@ -9,7 +11,7 @@ export default class TeachersController {
     // Récupérer la liste des enseignants triés par ordre alphabétique sur le nom et le prénom
     const teachers = await Teacher.query().orderBy('lastname', 'asc').orderBy('firstname', 'asc')
     // Pour obtenir des infos sur la variable teachers
-    dd(teachers)
+    //dd(teachers)
     // Appel de la vue
     return view.render('pages/home', { teachers })
   }
