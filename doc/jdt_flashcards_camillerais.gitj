@@ -103,6 +103,58 @@
       "status": "Done",
       "author": "hellokimmydream",
       "patch": true
+    },
+    {
+      "id": "1088f881-3f7e-4c5f-a808-ac240f7217bd",
+      "type": "commitpatch",
+      "sha": "e3540c0f69b99faebf882f041bdc010d6b73df8b",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/e3540c0f69b99faebf882f041bdc010d6b73df8b",
+      "name": "feat(step4)",
+      "description": "",
+      "date": "2026-01-21T14:10:00.000Z",
+      "duration": 15,
+      "status": "WIP",
+      "author": "hellokimmydream",
+      "patch": true
+    },
+    {
+      "id": "09c1e5d2-548a-451e-bd6f-73557569c040",
+      "type": "commitpatch",
+      "sha": "b94828835206c1dbc337b997668772d6cddffb1d",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/b94828835206c1dbc337b997668772d6cddffb1d",
+      "name": "feat(step5)",
+      "description": "",
+      "date": "2026-01-21T14:33:00.000Z",
+      "duration": 25,
+      "status": "Done",
+      "author": "hellokimmydream",
+      "patch": true
+    },
+    {
+      "id": "a02d2569-c27b-423f-b33f-2ef849e3b7d2",
+      "type": "commitpatch",
+      "sha": "8ee58935c0d95a5ae995892783c0caa175623330",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/8ee58935c0d95a5ae995892783c0caa175623330",
+      "name": "feat(step1)",
+      "description": "reconfiguration de visual studio code suite a une suppression du programme, installation des extensions, probleme avec npm run dev",
+      "date": "2026-01-21T12:26:00.000Z",
+      "duration": 40,
+      "status": "Done",
+      "author": "hellokimmydream",
+      "patch": true
+    },
+    {
+      "id": "9dd4035e-a318-40c0-8d6c-0f65b4048c44",
+      "type": "commitpatch",
+      "sha": "dd8a43ae32956987760a0d510865360a80a7057d",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/dd8a43ae32956987760a0d510865360a80a7057d",
+      "name": "chore(step0)",
+      "description": "installation app-teacher + problème avec setting edge/problème résolu, forcé Edge",
+      "date": "2026-01-14T14:37:00.000Z",
+      "duration": 35,
+      "status": "Done",
+      "author": "hellokimmydream",
+      "patch": true
     }
   ]
 }
