@@ -168,6 +168,19 @@
       "status": "WIP",
       "author": "hellokimmydream",
       "patch": true
+    },
+    {
+      "id": "700cb6f4-ead4-49d8-91a1-01f29bec74bb",
+      "type": "commitpatch",
+      "sha": "f5720ba7d576286e7b8b9ed727b1a1876c2b1ccc",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/f5720ba7d576286e7b8b9ed727b1a1876c2b1ccc",
+      "name": "feat(step8)",
+      "description": "problème avec import ctrl+espace , probleme resolu: aller sur ce qui est souligné en rouge et faire import avec ctrl+.",
+      "date": "2026-01-28T12:37:00.000Z",
+      "duration": 40,
+      "status": "WIP",
+      "author": "hellokimmydream",
+      "patch": true
     }
   ]
 }
