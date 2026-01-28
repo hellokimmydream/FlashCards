@@ -14,3 +14,7 @@ router.get('/', [TeachersController, 'index']).as('home')
 router.get('/teacher/:id/show', [TeachersController, 'show']).as('teacher.show')
 // Route permettant de supprimer un enseignant
 router.delete('/teacher/:id/destroy', [TeachersController, 'destroy']).as('teacher.destroy')
+// route pour permettre d afficher le formulaire qui permet l ajout de l enseignant
+router.get('/teacher/add', [TeachersController, 'create']).as('teacher.create')
+// route pour permettre l ajour d enseignants
+router.post('/teacher/add', [TeachersController, 'store']).as('teacher.store')
