@@ -155,6 +155,19 @@
       "status": "Done",
       "author": "hellokimmydream",
       "patch": true
+    },
+    {
+      "id": "475de325-8c45-4e11-b9ff-124fae1a8d81",
+      "type": "commitpatch",
+      "sha": "c04f3113a70fa1a6b22e4e201f417083abe0af46",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/c04f3113a70fa1a6b22e4e201f417083abe0af46",
+      "name": "feat(step8)",
+      "description": "recherche sur await car on l'utilise dans teachers_controller.ts",
+      "date": "2026-01-28T11:59:00.000Z",
+      "duration": 20,
+      "status": "WIP",
+      "author": "hellokimmydream",
+      "patch": true
     }
   ]
 }

@@ -1,3 +1,4 @@
+import Section from '#models/section'
 import Teacher from '#models/teacher'
 import { teacherValidator } from '#validators/teacher'
 import type { HttpContext } from '@adonisjs/core/http'

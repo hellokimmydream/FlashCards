@@ -11,7 +11,7 @@ const teacherValidator = vine.compile(
     origine: vine.string().trim().minLength(2),
 
     // nombre entier positif
-    seletionId: vine.number().positive(),
+    sectionId: vine.number().positive(),
   })
 )
 
