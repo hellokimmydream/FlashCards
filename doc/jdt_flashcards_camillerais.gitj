@@ -181,6 +181,19 @@
       "status": "WIP",
       "author": "hellokimmydream",
       "patch": true
+    },
+    {
+      "id": "176c062d-4c79-40b1-a15e-55a3a92250ef",
+      "type": "commitpatch",
+      "sha": "a4bec6b1007b2513f82da48f4f9146ad2a48243b",
+      "url": "https://github.com/hellokimmydream/FlashCards/commit/a4bec6b1007b2513f82da48f4f9146ad2a48243b",
+      "name": "feat(bloquage complet)",
+      "description": "depuis le step 8, probleme erreur 500 dans l inspecteur. le probleme à l'air de venir de la connexion avec la base de donnée. professeur indisponible pour demmander de l'aide et je n'arrive vraiment plus a trouver d'ou pourrait venir l'erreur",
+      "date": "2026-02-04T12:58:00.000Z",
+      "duration": 60,
+      "status": "WIP",
+      "author": "hellokimmydream",
+      "patch": true
     }
   ]
 }
