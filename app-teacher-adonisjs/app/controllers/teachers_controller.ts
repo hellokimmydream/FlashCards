@@ -27,6 +27,7 @@ export default class TeachersController {
 
     // ici on appel la vue
     return view.render('pages/teachers/create', { title: "Ajout d'un enseignant", sections })
+    // problème avec cette section, pas trouvé l erreur
   }
 
   /**
