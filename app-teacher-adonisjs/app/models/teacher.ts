@@ -15,7 +15,7 @@ export default class Teacher extends BaseModel {
   declare nickname: String
   @column()
   declare origine: String
-  @column()
+  @column({ columnName: 'section_id' })
   declare sectionId: number // Colonne correspondant à la clé étrangère
   @belongsTo(() => Section)
   declare section: BelongsTo<typeof Section> // Relation vers le modèle Section

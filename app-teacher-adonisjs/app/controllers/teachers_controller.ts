@@ -26,7 +26,7 @@ export default class TeachersController {
     const sections = await Section.query().orderBy('name', 'asc')
 
     // ici on appel la vue
-    return view.render('page/teachers/create', { title: "Ajout d'un enseignant", sections })
+    return view.render('pages/teachers/create', { title: "Ajout d'un enseignant", sections })
   }
 
   /**
