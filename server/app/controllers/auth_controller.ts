@@ -1,66 +1,62 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
-import hash from '@adonisjs/core/services/hash'
 
 export default class AuthController {
   async showRegister({ view }: HttpContext) {
-    return view.render('auth/register')
+    return view.render('pages/auth/register')
   }
 
-  async register({ request, response, auth, session }: HttpContext) {
-    const email = request.input('email')
+  async register({ request, response, session }: HttpContext) {
+    const username = request.input('username')
     const password = request.input('password')
 
-    // validation simple
-    if (!email || !password) {
-      session.flash('error', 'Email et mot de passe requis')
+    if (!username || !password) {
+      session.flash('Erreur', 'Username et mot de passe obligatoires')
       return response.redirect().back()
     }
 
-    const existing = await User.query().where('email', email).first()
+    if (String(password).length < 8) {
+      session.flash('Erreur', 'Mot de passe: minimum 8 caractères')
+      return response.redirect().back()
+    }
+
+    const existing = await User.query().where('username', username).first()
     if (existing) {
-      session.flash('error', 'Cet email est déjà utilisé')
+      session.flash('Erreur', 'Choisissez un autre username')
       return response.redirect().back()
     }
 
-    // le model user du starter gere le hash avec hook sinon hash ci-dessous
-    const user = await User.create({
-      email,
-      password,
-    })
-
-    // Pour la sécurite si model ne hash pas automatiquement il faut enlever les commentaire en dessous:
-    // user.password = await hash.make(password)
-    // await user.save()
-
-    await auth.use('web').login(user)
-    return response.redirect('/decks')
+    await User.create({ username, password })
+    session.flash('Creation réussie', 'Compte créé. Vous pouvez à présent vous connecter.')
+    return response.redirect('/login')
   }
 
   async showLogin({ view }: HttpContext) {
-    return view.render('auth/login')
+    return view.render('pages/auth/login')
   }
 
-  async login({ request, response, auth, session }: HttpContext) {
-    const email = request.input('email')
+  async login({ request, auth, response, session }: HttpContext) {
+    const username = request.input('username')
     const password = request.input('password')
 
-    if (!email || !password) {
-      session.flash('error', 'Email et mot de passe requis')
+    if (!username || !password) {
+      session.flash('Erreur', 'Username et mot de passe obligatoires')
       return response.redirect().back()
     }
 
     try {
-      await auth.use('web').attempt(email, password)
+      await auth.use('web').attempt(username, password)
+      session.flash('success', 'Connecté')
       return response.redirect('/decks')
     } catch {
-      session.flash('error', 'Identifiants invalides')
+      session.flash('error', 'Login incorrect')
       return response.redirect().back()
     }
   }
 
-  async logout({ response, auth }: HttpContext) {
+  async logout({ auth, response, session }: HttpContext) {
     await auth.use('web').logout()
-    return response.redirect('/')
+    session.flash('success', 'Déconnecté')
+    return response.redirect('/login')
   }
 }
