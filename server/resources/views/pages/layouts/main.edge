@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>@!section('title')FlashCards@end</title>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body>
+  <nav style="display:flex; gap:12px; padding:12px; border-bottom:1px solid #333;">
+    <a href="/" style="color:white;">Accueil</a>
+    <a href="/decks" style="color:white;">Decks</a>
+    <a href="/register" style="color:white;">Register</a>
+    <a href="/login" style="color:white;">Login</a>
+    <form action="/logout" method="POST" style="margin-left:auto;">
+      @csrf
+      <button type="submit">Logout</button>
+    </form>
+  </nav>
+
+  <main style="padding:16px;">
+    @if(flashMessages.has('success'))
+      <p style="color: #2ecc71;">{{ flashMessages.get('success') }}</p>
+    @endif
+
+    @if(flashMessages.has('error'))
+      <p style="color: #e74c3c;">{{ flashMessages.get('error') }}</p>
+    @endif
+
+    @!section('content')@end
+  </main>
+</body>
+</html>
