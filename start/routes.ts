@@ -1,11 +1,12 @@
 import router from '@adonisjs/core/services/router'
-import { middleware } from '#start/kernel'
-import AuthController from '#controllers/auth_controller'
-import DecksController from '#controllers/decks_controller'
+import { middleware } from '../start/kernel'
+import { AuthController} from '../app/controllers/auth_controller'
+import { DecksController} from '../app/controllers/decks_controller'
 
-router.get('/', async ({ view }) => view.render('pages/home'))
-
-// routes pour authentification
+router.get('/', async ({ view }) => {
+  return view.render('pages/home')
+})
+// routes pour authentification user
 router.get('/register', [AuthController, 'showRegister']).use(middleware.guest())
 router.post('/register', [AuthController, 'register']).use(middleware.guest())
 

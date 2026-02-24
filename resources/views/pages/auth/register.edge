@@ -1,12 +1,15 @@
-@extends('layouts/main')
+@layout('layouts/main')
 
-@section('title')Register — @end
+@section('title')
+  Register
+@endsection
 
 @section('content')
   <h1>Créer un compte</h1>
 
   <form method="POST" action="/register" style="display:flex; flex-direction:column; gap:10px; max-width:320px;">
     @csrf
+
     <label>Username</label>
     <input name="username" />
 
