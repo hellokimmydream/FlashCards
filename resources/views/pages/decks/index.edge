@@ -1,26 +1,17 @@
-@extends('layouts/main')
-
-@section('title')Decks — @end
+@layout('layouts/main')
 
 @section('content')
-  <h1>Mes decks</h1>
-  <a href="/decks/create">Nouveau deck</a>
+  <h1>Mes Decks</h1>
 
-  <ul style="margin-top:12px;">
-    @each(deck in decks)
-      <li style="margin:10px 0; padding:10px; border:1px solid #333;">
-        <strong>{{ deck.title }}</strong>
-        @if(deck.description)
-          <p>{{ deck.description }}</p>
-        @endif
+  <div class="deck-list">
+    <div class="deck-item">
+      <h2>Vocabulaire anglais</h2>
+      <p class="muted">12 cartes</p>
+    </div>
 
-        <a href="/decks/{{ deck.id }}/edit">Modifier</a>
-
-        <form action="/decks/{{ deck.id }}/delete" method="POST" style="display:inline;">
-          @csrf
-          <button type="submit">Supprimer</button>
-        </form>
-      </li>
-    @end
-  </ul>
+    <div class="deck-item">
+      <h2>Histoire - Révolution française</h2>
+      <p class="muted">8 cartes</p>
+    </div>
+  </div>
 @endsection

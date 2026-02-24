@@ -1,16 +1,13 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>@!section('title', 'FlashCards')</title>
+<body>
+  <div class="navbar">
+    <div><strong>FlashCards</strong></div>
+    <div>
+      <a href="/decks">Decks</a>
+      <a href="/logout">Déconnexion</a>
+    </div>
+  </div>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-  </head>
-
-  <body>
-    <main class="container">
-      @!section('content')
-    </main>
-  </body>
-</html>
+  <main class="container">
+    @!section('content')
+  </main>
+</body>
