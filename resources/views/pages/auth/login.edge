@@ -1,20 +1,38 @@
 @layout('layouts/main')
 
 @section('title')
-  Login
+  Connexion
 @endsection
 
 @section('content')
   <h1>Connexion</h1>
 
-  <form method="POST" action="/login" style="display:flex; flex-direction:column; gap:10px; max-width:320px;">
+  @if(flashMessages.get('error'))
+    <div class="card" style="background:#fee2e2; color:#991b1b;">
+      {{ flashMessages.get('error') }}
+    </div>
+  @end
+
+  @if(flashMessages.get('success'))
+    <div class="card" style="background:#dcfce7; color:#166534;">
+      {{ flashMessages.get('success') }}
+    </div>
+  @end
+
+  <form method="POST" action="/login">
     @csrf
-    <label>Username</label>
-    <input name="username" />
+
+    <label>Email</label>
+    <input type="email" name="email" required />
 
     <label>Mot de passe</label>
-    <input name="password" type="password" />
+    <input type="password" name="password" required />
 
     <button type="submit">Se connecter</button>
   </form>
+
+  <p class="muted" style="margin-top:16px;">
+    Pas encore de compte ?
+    <a href="/register">Créer un compte</a>
+  </p>
 @endsection

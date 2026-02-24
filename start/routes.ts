@@ -3,24 +3,44 @@ import { middleware } from '#start/kernel'
 import AuthController from '#controllers/auth_controller'
 import DecksController from '#controllers/decks_controller'
 
-router.get('/', async ({ view }) => {
-  return view.render('pages/home')
+/**
+ * home
+ * si user est connect on va sur deck
+ * sion demmande de login user
+ */
+router.get('/', async ({ auth, response }) => {
+  if (await auth.check()) {
+    return response.redirect('/decks')
+  }
+  return response.redirect('/login')
 })
-// routes pour authentification user
-router.get('/register', [AuthController, 'showRegister']).use(middleware.guest())
-router.post('/register', [AuthController, 'register']).use(middleware.guest())
 
-router.get('/login', [AuthController, 'showLogin']).use(middleware.guest())
-router.post('/login', [AuthController, 'login']).use(middleware.guest())
+/** authentification */
+router
+  .group(() => {
+    router.get('/register', [AuthController, 'showRegister'])
+    router.post('/register', [AuthController, 'register'])
+
+    router.get('/login', [AuthController, 'showLogin'])
+    router.post('/login', [AuthController, 'login'])
+  })
+  .use(middleware.guest())
 
 router.post('/logout', [AuthController, 'logout']).use(middleware.auth())
 
-// route pour decks
-router.get('/decks', [DecksController, 'index']).use(middleware.auth())
-router.get('/decks/create', [DecksController, 'create']).use(middleware.auth())
-router.post('/decks', [DecksController, 'store']).use(middleware.auth())
+/** deck **/
+router
+  .group(() => {
+    router.get('/decks', [DecksController, 'index'])
+    router.get('/decks/create', [DecksController, 'create'])
+    router.post('/decks', [DecksController, 'store'])
 
-router.get('/decks/:id/edit', [DecksController, 'edit']).use(middleware.auth())
-router.post('/decks/:id', [DecksController, 'update']).use(middleware.auth())
+    router.get('/decks/:id/edit', [DecksController, 'edit'])
+    router.post('/decks/:id', [DecksController, 'update'])
 
-router.post('/decks/:id/delete', [DecksController, 'destroy']).use(middleware.auth())
+    router.post('/decks/:id/delete', [DecksController, 'destroy'])
+
+    // pour réviser cards
+    router.get('/decks/:id/learn', [DecksController, 'learn'])
+  })
+  .use(middleware.auth())
