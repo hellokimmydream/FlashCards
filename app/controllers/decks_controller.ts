@@ -83,4 +83,18 @@ export default class DecksController {
     session.flash('Réussite', 'Deck supprimé')
     return response.redirect('/decks')
   }
+
+  async learn({ params, auth, view, response, session }: HttpContext) {
+    const user = await auth.getUserOrFail()
+
+    const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
+
+    if (!deck) {
+      session.flash('erreur', 'Deck introuvable')
+
+      return response.redirect('/decks')
+    }
+
+    return view.render('pages/decks/learn', { deck })
+  }
 }

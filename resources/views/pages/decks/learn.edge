@@ -1,9 +1,27 @@
 @layout('layouts/main')
 
-@section('content')
-  <h1>Révision</h1>
+    @section('title')
+        Réviser
+    @endsection
+    
+    
+    
+    @section('content')
 
-  <div class="flashcard">
-    Quelle est le chat roux le plus connu ?
-  </div>
-@endsection
+        <h1>
+            Faire des révisions
+        </h1>
+
+        <p>
+            <strong>Deck :</strong>{{ deck.title }}
+        </p>
+
+        <p>
+            Mode révision à venir
+        </p>
+
+        <p>
+            <a href="/decks">Retour</a>
+        </p>
+
+    @endsection

@@ -1,3 +1,9 @@
+<!--
+pour csrf : quand le formulaire est envoyé, Adonis peut vérifier :
+que la requête vient bien de ton site
+que c’est un vrai utilisateur , sinon requete rejetee
+-->
+
 @layout('layouts/main')
 
     @section('title')
@@ -13,6 +19,7 @@
         </h1>
 
         <form action="/login" method="POST">
+
             @csrf
             
             <label>
