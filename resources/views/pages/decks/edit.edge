@@ -1,18 +1,34 @@
-@extends('layouts/main')
+@layout('layouts/main')
 
-@section('title')Modifier deck — @end
+    @section('title')
+        Modifier deck
+    @endsection
+    
+    @section('content')
 
-@section('content')
-  <h1>Modifier un deck</h1>
+        <h1>
+            Modifier le deck
+        </h1>
 
-  <form method="POST" action="/decks/{{ deck.id }}" style="display:flex; flex-direction:column; gap:10px; max-width:420px;">
-    @csrf
-    <label>Titre</label>
-    <input name="title" value="{{ deck.title }}" />
+        <form action="/decks/{{ deck.id }}" method="POST">
+            @csrf
+            
+            <label>
+                Titre
+      <input type="text" name="title" value="{{ deck.title }}" required />
+            </label>
 
-    <label>Description</label>
-    <textarea name="description">{{ deck.description }}</textarea>
+            <label>
+                Description
+      <textarea name="description">{{ deck.description }}</textarea>
 
-    <button type="submit">Enregistrer</button>
-  </form>
-@endsection
+            </label>
+
+            <button type="submit">Enregistrer</button>
+        </form>
+
+        <p>
+            <a href="/decks">Retour</a>
+        </p>
+
+    @endsection

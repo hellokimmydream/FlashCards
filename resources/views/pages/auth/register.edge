@@ -1,41 +1,41 @@
 @layout('layouts/main')
 
-@section('title')
-  Inscription
-@endsection
+    @section('title')
+        Register
+    @endsection
+    
+    
+    
+    @section('content')
 
-@section('content')
-  <h1>Créer un compte</h1>
+        <h1>
+            Créer un compte
+        </h1>
 
-  @if(flashMessages.get('error'))
-    <div class="card" style="background:#fee2e2; color:#991b1b;">
-      {{ flashMessages.get('error') }}
-    </div>
-  @end
+        <form action="/register" method="POST">
+            @csrf
+            
+            <label>
+                Nom complet (optionnel)
+      <input type="text" name="fullName" />
+            </label>
 
-  @if(flashMessages.get('success'))
-    <div class="card" style="background:#dcfce7; color:#166534;">
-      {{ flashMessages.get('success') }}
-    </div>
-  @end
+            <label>
+                Email
+      <input type="email" name="email" required />
+            </label>
 
-  <form method="POST" action="/register">
-    @csrf
+            <label>
+                Mot de passe
+      <input type="password" name="password" required />
+            </label>
 
-    <label>Pseudo</label>
-    <input type="text" name="fullName" />
+            <button type="submit">Créer</button>
+        </form>
 
-    <label>Email</label>
-    <input type="email" name="email" required />
-
-    <label>Mot de passe</label>
-    <input type="password" name="password" required />
-
-    <button type="submit">Créer un compte</button>
-  </form>
-
-  <p class="muted" style="margin-top:16px;">
-    Déjà un compte ?
+        <p>
+            Déjà un compte ?
     <a href="/login">Se connecter</a>
-  </p>
-@endsection
+        </p>
+
+    @endsection

@@ -1,18 +1,35 @@
-@extends('layouts/main')
+@layout('layouts/main')
 
-@section('title')Créer deck — @end
+    @section('title')
+        Créer un deck
+    @endsection
+    
+    
+    
+    @section('content')
 
-@section('content')
-  <h1>Créer un deck</h1>
+        <h1>
+            Créer un deck
+        </h1>
 
-  <form method="POST" action="/decks" style="display:flex; flex-direction:column; gap:10px; max-width:420px;">
-    @csrf
-    <label>Titre</label>
-    <input name="title" />
+        <form action="/decks" method="POST">
+            @csrf
+            
+            <label>
+                Titre
+      <input type="text" name="title" required />
+            </label>
 
-    <label>Description</label>
-    <textarea name="description"></textarea>
+            <label>
+                Description
+      <textarea name="description"></textarea>
+            </label>
 
-    <button type="submit">Créer</button>
-  </form>
-@endsection
+            <button type="submit">Créer </button>
+        </form>
+
+        <p>
+            <a href="/decks">Retour </a>
+        </p>
+
+    @endsection
