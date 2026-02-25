@@ -8,16 +8,18 @@ export default class AuthController {
   }
 
   async register({ request, response, session }: HttpContext) {
-    const email = String(request.input('email') ?? '').trim().toLowerCase()
-    const password = String(request.input('password') ?? '')
-    const fullName = String(request.input('fullName') ?? '').trim() || null
+    const email = await String(request.input('email') ?? '')
+      .trim()
+      .toLowerCase()
+    const password = await String(request.input('password') ?? '')
+    const fullName = (await String(request.input('fullName') ?? '').trim()) || null
 
     if (!email || !password) {
       session.flash('error', 'Email et mot de passe obligatoires')
       return response.redirect().back()
     }
 
-    // validation simple
+    // validation simple par étape
     if (!email.includes('@')) {
       session.flash('error', 'Email invalide')
       return response.redirect().back()
@@ -49,8 +51,10 @@ export default class AuthController {
   }
 
   async login({ request, auth, response, session }: HttpContext) {
-    const email = String(request.input('email') ?? '').trim().toLowerCase()
-    const password = String(request.input('password') ?? '')
+    const email = await String(request.input('email') ?? '')
+      .trim()
+      .toLowerCase()
+    const password = await String(request.input('password') ?? '')
 
     if (!email || !password) {
       session.flash('error', 'Email et mot de passe obligatoires')
@@ -58,7 +62,7 @@ export default class AuthController {
     }
 
     try {
-      // AuthFinder mixin -> verifyCredentials(email, password)
+      // authentification
       const user = await User.verifyCredentials(email, password)
       await auth.use('web').login(user)
 

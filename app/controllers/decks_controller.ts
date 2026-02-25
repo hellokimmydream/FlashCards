@@ -1,9 +1,15 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Deck from '#models/deck'
 
+// correction de await dans fuction
+// auth.getUserOrFail() fait une opération asynchrone
+//await attend la fin de cette opération et donne directement le résultat.
+// Sans await récupères qu’une promesse pas l’utilisateur lui-même.
+// await rend le code plus lisible
+
 export default class DecksController {
   async index({ auth, view }: HttpContext) {
-    const user = auth.getUserOrFail()
+    const user = await auth.getUserOrFail()
     const decks = await Deck.query().where('userId', user.id).orderBy('id', 'desc')
     return view.render('pages/decks/index', { decks })
   }
@@ -13,9 +19,9 @@ export default class DecksController {
   }
 
   async store({ request, auth, response, session }: HttpContext) {
-    const user = auth.getUserOrFail()
-    const title = request.input('title')
-    const description = request.input('description')
+    const user = await auth.getUserOrFail()
+    const title = await request.input('title')
+    const description = await request.input('description')
 
     if (!title) {
       session.flash('Erreur', 'Titre obligatoire')
@@ -28,7 +34,7 @@ export default class DecksController {
   }
 
   async edit({ params, auth, view, response, session }: HttpContext) {
-    const user = auth.getUserOrFail()
+    const user = await auth.getUserOrFail()
     const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
 
     if (!deck) {
@@ -40,7 +46,7 @@ export default class DecksController {
   }
 
   async update({ params, request, auth, response, session }: HttpContext) {
-    const user = auth.getUserOrFail()
+    const user = await auth.getUserOrFail()
     const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
 
     if (!deck) {
@@ -48,8 +54,8 @@ export default class DecksController {
       return response.redirect('/decks')
     }
 
-    const title = request.input('title')
-    const description = request.input('description')
+    const title = await request.input('title')
+    const description = await request.input('description')
 
     if (!title) {
       session.flash('Erreur', 'Titre obligatoire')
@@ -65,7 +71,7 @@ export default class DecksController {
   }
 
   async destroy({ params, auth, response, session }: HttpContext) {
-    const user = auth.getUserOrFail()
+    const user = await auth.getUserOrFail()
     const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
 
     if (!deck) {
