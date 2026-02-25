@@ -1,40 +1,36 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Deck from '#models/deck'
 
-// correction de await dans fuction
-// auth.getUserOrFail() fait une opération asynchrone
-//await attend la fin de cette opération et donne directement le résultat.
-// Sans await récupères qu’une promesse pas l’utilisateur lui-même.
-// await rend le code plus lisible
-
 export default class DecksController {
+  // Affiche tous les decks
   async index({ view }: HttpContext) {
     const decks = await Deck.query().orderBy('id', 'desc')
     return view.render('pages/decks/index', { decks })
   }
 
+  // Affiche le formulaire de création
   async create({ view }: HttpContext) {
     return view.render('pages/decks/create')
   }
 
-  async store({ request, auth, response, session }: HttpContext) {
-    const user = await auth.getUserOrFail()
-    const title = await request.input('title')
-    const description = await request.input('description')
+  // Enregistre un nouveau deck
+  async store({ request, response, session }: HttpContext) {
+    const title = request.input('title')
+    const description = request.input('description')
 
     if (!title) {
       session.flash('Erreur', 'Titre obligatoire')
       return response.redirect().back()
     }
 
-    await Deck.create({ title, description, userId: user.id })
+    await Deck.create({ title, description })
     session.flash('Réussite', 'Deck créé')
     return response.redirect('/decks')
   }
 
-  async edit({ params, auth, view, response, session }: HttpContext) {
-    const user = await auth.getUserOrFail()
-    const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
+  // Affiche le formulaire d’édition
+  async edit({ params, view, response, session }: HttpContext) {
+    const deck = await Deck.find(params.id)
 
     if (!deck) {
       session.flash('Erreur', 'Deck introuvable')
@@ -44,17 +40,17 @@ export default class DecksController {
     return view.render('pages/decks/edit', { deck })
   }
 
-  async update({ params, request, auth, response, session }: HttpContext) {
-    const user = await auth.getUserOrFail()
-    const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
+  // Met à jour un deck existant
+  async update({ params, request, response, session }: HttpContext) {
+    const deck = await Deck.find(params.id)
 
     if (!deck) {
       session.flash('Erreur', 'Deck introuvable')
       return response.redirect('/decks')
     }
 
-    const title = await request.input('title')
-    const description = await request.input('description')
+    const title = request.input('title')
+    const description = request.input('description')
 
     if (!title) {
       session.flash('Erreur', 'Titre obligatoire')
@@ -69,9 +65,9 @@ export default class DecksController {
     return response.redirect('/decks')
   }
 
-  async destroy({ params, auth, response, session }: HttpContext) {
-    const user = await auth.getUserOrFail()
-    const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
+  // Supprime un deck
+  async destroy({ params, response, session }: HttpContext) {
+    const deck = await Deck.find(params.id)
 
     if (!deck) {
       session.flash('Erreur', 'Deck introuvable')
@@ -83,14 +79,12 @@ export default class DecksController {
     return response.redirect('/decks')
   }
 
-  async learn({ params, auth, view, response, session }: HttpContext) {
-    const user = await auth.getUserOrFail()
-
-    const deck = await Deck.query().where('id', params.id).where('userId', user.id).first()
+  // Affiche la page d’apprentissage d’un deck
+  async learn({ params, view, response, session }: HttpContext) {
+    const deck = await Deck.find(params.id)
 
     if (!deck) {
-      session.flash('erreur', 'Deck introuvable')
-
+      session.flash('Erreur', 'Deck introuvable')
       return response.redirect('/decks')
     }
 
