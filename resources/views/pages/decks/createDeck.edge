@@ -1,0 +1,32 @@
+@component('components/layout', { title: "Créer un deck" })
+
+    <h3>
+        Créer un nouveau deck
+    </h3>
+
+    <form action="/decks" method="POST">
+        @csrf
+        
+        <div class="field">
+            <label for="title">Titre</label>
+            <input type="text" id="title" name="title" value="{{ old('title') || '' }}" required />
+            @inputError('title')
+                <p class="text-danger">
+                    {{ $messages.join(', ') }}
+                </p>
+            @end
+        </div>
+
+        <div class="field">
+            <label for="description">Description (facultatif)</label>
+            <textarea id="description" name="description">{{ old('description') || '' }}</textarea>
+        </div>
+
+        <button type="submit">Créer le deck</button>
+    </form>
+
+    <p style="margin-top:10px;">
+        <a href="/decks">Retour à la liste des decks</a>
+    </p>
+
+@endcomponent

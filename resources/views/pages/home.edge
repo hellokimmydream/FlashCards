@@ -1,7 +1,20 @@
 @component('components/layout', { title: title })
-    <h3>
-        Liste des enseignants
-    </h3>
-    <a href="/login">Se connecter</a>
-    <a href="/register">Créer un compte</a>
+
+    <h1>
+        Bienvenue sur FlashCard App
+    </h1>
+
+    <p>
+        Créer vos decks et cartes pour réviser facilement.
+    </p>
+
+    <div style="margin-top:20px;">
+        <a href="/decks" style="margin-right:15px;">Voir mes decks</a>
+        <a href="/decks/create">Créer un nouveau deck</a>
+    </div>
+
+    <p style="margin-top:30px; font-size:0.9em; color:#666;">
+        Commencez par créer un deck, puis ajoutez vos cartes pour réviser.
+    </p>
+
 @endcomponent

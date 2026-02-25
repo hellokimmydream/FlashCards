@@ -1,0 +1,28 @@
+@component('components/layout', { title: "Modifier un deck" })
+
+    <h3>
+        Modifier le deck : {{ deck.title }}
+    </h3>
+
+    <form action="/decks/{{ deck.id }}" method="POST">
+        @csrf
+        @method('PUT')
+
+            <div class="field">
+                <label for="title">Titre</label>
+                <input type="text" id="title" name="title" value="{{ deck.title }}" required />
+            </div>
+
+            <div class="field">
+                <label for="description">Description (facultatif)</label>
+                <textarea id="description" name="description">{{ deck.description }}</textarea>
+            </div>
+
+            <button type="submit">Mettre à jour le deck</button>
+        </form>
+
+        <p style="margin-top:10px;">
+            <a href="/decks">Retour à la liste des decks</a>
+        </p>
+
+    @endcomponent
