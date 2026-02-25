@@ -1,16 +1,23 @@
 import { defineConfig } from '@adonisjs/lucid'
+import env from '#start/env'
 
 export default defineConfig({
-  connection: Env.get('DB_CONNECTION', 'sqlite'),
+  connection: env.get('DB_CONNECTION', 'sqlite'),
 
   connections: {
     sqlite: {
-      client: 'sqlite3',
+      client: 'sqlite',
+
       connection: {
-        filename: Env.get('SQLITE_DB_PATH', './database.sqlite'),
+        host: env.get('DB_HOST'),
+        port: env.get('DB_PORT'),
+        user: env.get('DB_USER'),
+        password: env.get('DB_PASSWORD'),
+        database: env.get('DB_DATABASE'),
       },
+
       useNullAsDefault: true,
-      healthCheck: true,
+      debug: false,
     },
   },
 })
