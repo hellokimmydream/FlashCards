@@ -1,36 +1,16 @@
-import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
 
-const dbConfig = defineConfig({
-  connection: env.get('DB_CONNECTION'),
+export default defineConfig({
+  connection: Env.get('DB_CONNECTION', 'sqlite'),
 
   connections: {
     sqlite: {
-      client: 'better-sqlite3',
+      client: 'sqlite3',
       connection: {
-        filename: env.get('DB_DATABASE'),
+        filename: Env.get('SQLITE_DB_PATH', './database.sqlite'),
       },
-      migrations: {
-        naturalSort: true,
-        paths: ['database/migrations'],
-      },
-    },
-
-    mysql: {
-      client: 'mysql2',
-      connection: {
-        host: env.get('DB_HOST'),
-        port: env.get('DB_PORT'),
-        user: env.get('DB_USER'),
-        password: env.get('DB_PASSWORD'),
-        database: env.get('DB_DATABASE'),
-      },
-      migrations: {
-        naturalSort: true,
-        paths: ['database/migrations'],
-      },
+      useNullAsDefault: true,
+      healthCheck: true,
     },
   },
 })
-
-export default dbConfig
