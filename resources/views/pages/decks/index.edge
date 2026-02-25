@@ -1,43 +1,32 @@
-@layout('layouts/main')
+@component('components/layout', { title: title })
+    <h3>
+        Mes decks
+    </h3>
 
-    @section('title')
-        Decks
-    @endsection
-    
-    @section('content')
+    <p>
+        <a href="/decks/create">Créer un deck</a>
+    </p>
 
-        <h1>
-            Mes decks
-        </h1>
+    @if(decks.length === 0)
 
         <p>
-            <a href="/decks/create">Créer un deck</a>
+            Aucun deck
         </p>
 
-        @if(decks.length === 0)
+        <ul>
 
-            <p>
-                Aucun deck
-            </p>
+            @each(deck in decks)
 
-        @else
-        
-            <ul>
+                <li style="margin-bottom:10px;">
 
-                @each(deck in decks)
+                    <strong>{{ deck.title }}</strong>
 
-                    <li style="margin-bottom:10px;">
+                    @if(deck.description)
 
-                        <strong>{{ deck.title }}</strong>
+                        <div>
+                            {{ deck.description }}
+                        </div>
 
-                        @if(deck.description)
-
-                            <div>
-                                {{ deck.description }}
-                            </div>
-
-                        @endif
-                        
                         <div style="display:flex; gap:8px; margin-top:6px;">
 
                             <a href="/decks/{{ deck.id }}/edit">Modifier</a>
@@ -45,21 +34,14 @@
                             <a href="/decks/{{ deck.id }}/learn">Commencer à réviser</a>
 
                             <form action="/decks/{{ deck.id }}/delete" method="POST" style="display:inline;">
-
-                                @csrf
-                                
                                 <button type="submit">Supprimer</button>
 
                             </form>
-
                         </div>
-
-                    </li>
-
-                @endeach
-                
-            </ul>
-
-        @endif
-        
-    @endsection
+                    @end
+                </li>
+            @end
+        </ul>
+    @end
+    
+@endcomponent

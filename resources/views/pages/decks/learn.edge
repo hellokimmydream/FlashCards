@@ -1,27 +1,18 @@
-@layout('layouts/main')
+@component('components/layout', { title: title })
 
-    @section('title')
-        Réviser
-    @endsection
-    
-    
-    
-    @section('content')
+    <h3>
+        Faire des révisions
+    </h3>
 
-        <h1>
-            Faire des révisions
-        </h1>
+    <p>
+        <strong>Deck :</strong>{{ deck.title }}
+    </p>
 
-        <p>
-            <strong>Deck :</strong>{{ deck.title }}
-        </p>
+    <p>
+        Mode révision à venir
+    </p>
 
-        <p>
-            Mode révision à venir
-        </p>
-
-        <p>
-            <a href="/decks">Retour</a>
-        </p>
-
-    @endsection
+    <p>
+        <a href="/decks">Retour</a>
+    </p>
+@endcomponent

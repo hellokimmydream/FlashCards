@@ -1,34 +1,28 @@
-@layout('layouts/main')
+@component('components/layout', { title: title })
 
-    @section('title')
-        Modifier deck
-    @endsection
-    
-    @section('content')
+    <h3>
+        Modifier le deck
+    </h3>
 
-        <h1>
-            Modifier le deck
-        </h1>
-
-        <form action="/decks/{{ deck.id }}" method="POST">
-            @csrf
+    <form action="/decks/{{ deck.id }}" method="POST">
+        @csrf
             
-            <label>
-                Titre
+        <label>
+            Titre
       <input type="text" name="title" value="{{ deck.title }}" required />
-            </label>
+        </label>
 
-            <label>
-                Description
+        <label>
+            Description
       <textarea name="description">{{ deck.description }}</textarea>
 
-            </label>
+        </label>
 
-            <button type="submit">Enregistrer</button>
-        </form>
+        <button type="submit">Enregistrer</button>
+    </form>
 
-        <p>
-            <a href="/decks">Retour</a>
-        </p>
+    <p>
+        <a href="/decks">Retour</a>
+    </p>
 
-    @endsection
+@endcomponent

@@ -1,43 +1,26 @@
-<!--
-pour csrf : quand le formulaire est envoyé, Adonis peut vérifier :
-que la requête vient bien de ton site
-que c’est un vrai utilisateur , sinon requete rejetee
--->
+@component('components/layout', { title: title })
 
-@layout('layouts/main')
+    <h3>
+        Connexion
+    </h3>
 
-    @section('title')
-        Login
-    @endsection
-    
-    
-    
-    @section('content')
+    <form action="/login" method="POST">
 
-        <h1>
-            Connexion
-        </h1>
-
-        <form action="/login" method="POST">
-
-            @csrf
-            
-            <label>
-                Email
+        <label>
+            Email
       <input type="email" name="email" required />
-            </label>
+        </label>
 
-            <label>
-                Mot de passe
+        <label>
+            Mot de passe
       <input type="password" name="password" required />
-            </label>
+        </label>
 
-            <button type="submit">Se connecter</button>
-        </form>
+        <button type="submit">Se connecter</button>
+    </form>
 
-        <p>
-            Pas de compte ?
+    <p>
+        Pas de compte ?
     <a href="/register">Créer un compte</a>
-        </p>
-
-    @endsection
+    </p>
+@end

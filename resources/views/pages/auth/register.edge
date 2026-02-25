@@ -1,41 +1,30 @@
-@layout('layouts/main')
+@component('components/layout', { title: title })
 
-    @section('title')
-        Register
-    @endsection
-    
-    
-    
-    @section('content')
+    <h3>
+        Créer un compte
+    </h3>
 
-        <h1>
-            Créer un compte
-        </h1>
-
-        <form action="/register" method="POST">
-            @csrf
-            
-            <label>
-                Nom complet
+    <form action="/register" method="POST">
+        <label>
+            Nom complet
       <input type="text" name="fullName" />
-            </label>
+        </label>
 
-            <label>
-                Email
+        <label>
+            Email
       <input type="email" name="email" required />
-            </label>
+        </label>
 
-            <label>
-                Mot de passe
+        <label>
+            Mot de passe
       <input type="password" name="password" required />
-            </label>
+        </label>
 
-            <button type="submit">Créer</button>
-        </form>
+        <button type="submit">Créer</button>
+    </form>
 
-        <p>
-            Déjà un compte ?
+    <p>
+        Déjà un compte ?
     <a href="/login">Se connecter</a>
-        </p>
+    </p>
 
-    @endsection

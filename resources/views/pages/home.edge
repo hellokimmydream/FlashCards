@@ -1,11 +1,7 @@
-@layout('layouts/main')
-
-@section('title')
-  FlashCards
-@endsection
-
-@section('content')
-  <h1>Bienvenue sur FlashCards</h1>
-  <a href="/login">Se connecter</a>
-  <a href="/register">Créer un compte</a>
-@endsection
+@component('components/layout', { title: title })
+    <h3>
+        Liste des enseignants
+    </h3>
+    <a href="/login">Se connecter</a>
+    <a href="/register">Créer un compte</a>
+@endcomponent

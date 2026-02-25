@@ -8,9 +8,8 @@ import Deck from '#models/deck'
 // await rend le code plus lisible
 
 export default class DecksController {
-  async index({ auth, view }: HttpContext) {
-    const user = await auth.getUserOrFail()
-    const decks = await Deck.query().where('userId', user.id).orderBy('id', 'desc')
+  async index({ view }: HttpContext) {
+    const decks = await Deck.query().orderBy('id', 'desc')
     return view.render('pages/decks/index', { decks })
   }
 
