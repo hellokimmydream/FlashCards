@@ -1,0 +1,96 @@
+@extends('layouts/main')
+
+  @section('title')
+    Deck —
+  @end
+  
+  
+  
+  @section('content')
+
+    <h1>
+      Deck : {{ deck.title }}
+    </h1>
+
+    @if(deck.description)
+
+      <p>
+        {{ deck.description }}
+      </p>
+
+    @endif
+    
+    
+    
+    <div class="actions">
+
+      <a class="link" href="/decks/{{ deck.id }}/edit">Modifier le deck</a>
+
+      <form
+        action="/decks/{{ deck.id }}/delete"
+        method="POST"
+        style="display:inline;"
+        onsubmit="return confirm('Supprimer ce deck ?');"
+      >
+
+        @csrf
+        
+        <button class="btn btn-danger" type="submit">Supprimer</button>
+
+      </form>
+
+      <a class="link" href="/decks/{{ deck.id }}/cards/create">Ajouter une carte</a>
+
+    </div>
+
+    <h2>
+      Cartes
+    </h2>
+
+    @if(cards.length === 0)
+
+      <p>
+        Aucune carte pour le moment.
+      </p>
+
+    @else
+    
+      @each(card in cards)
+
+        <div class="card">
+
+          <strong>Q:</strong>{{ card.question }}
+          <div class="actions">
+
+            <a class="link" href="/cards/{{ card.id }}">Voir</a>
+
+            <a class="link" href="/cards/{{ card.id }}/edit">Modifier</a>
+
+            <form
+              action="/cards/{{ card.id }}/delete"
+              method="POST"
+              style="display:inline;"
+              onsubmit="return confirm('Supprimer cette carte ?');"
+            >
+
+              @csrf
+              
+              <button class="btn btn-danger" type="submit">Supprimer</button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      @end
+      
+    @endif
+    
+    
+    
+    <p>
+      <a class="link" href="/decks">Retour à la liste</a>
+    </p>
+
+  @endsection

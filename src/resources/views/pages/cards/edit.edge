@@ -1,0 +1,39 @@
+@extends('layouts/main')
+
+  @section('title')
+    Modifier carte —
+  @end
+  
+  
+  
+  @section('content')
+
+    <h1>
+      Modification carte
+    </h1>
+
+    <form method="POST" action="/cards/{{ card.id }}">
+
+      @csrf
+      
+      
+      
+      <label>Question</label>
+
+      <textarea name="question" rows="3">{{ card.question }}</textarea>
+
+      <label>Réponse</label>
+
+      <textarea name="answer" rows="3">{{ card.answer }}</textarea>
+
+      <div class="actions">
+
+        <button class="btn" type="submit">Enregistrer</button>
+
+        <a class="link" href="/decks/{{ card.deckId }}">Abandonner</a>
+
+      </div>
+
+    </form>
+
+  @endsection

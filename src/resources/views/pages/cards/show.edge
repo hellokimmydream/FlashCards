@@ -1,0 +1,76 @@
+@extends('layouts/main')
+
+  @section('title')
+    Carte —
+  @end
+  
+  
+  
+  @section('content')
+
+    <h1>
+      Carte #{{ card.id }}
+    </h1>
+
+    <div class="card" id="flashcard" style="cursor:pointer;">
+
+      <div id="front">
+
+        <strong>Question</strong>
+
+        <p>
+          {{ card.question }}
+        </p>
+
+        <small>(clique pour voir la réponse)</small>
+
+      </div>
+
+      <div id="back" style="display:none;">
+
+        <strong>Réponse</strong>
+
+        <p>
+          {{ card.answer }}
+        </p>
+
+        <small>(clique pour revenir)</small>
+
+      </div>
+
+    </div>
+
+    <div class="actions">
+
+      <a class="link" href="/decks/{{ card.deckId }}">OK (retour au deck)</a>
+
+      <a class="link" href="/cards/{{ card.id }}/edit">Modifier</a>
+
+      <form
+        action="/cards/{{ card.id }}/delete"
+        method="POST"
+        style="display:inline;"
+        onsubmit="return confirm('Supprimer cette carte ?');"
+      >
+
+        @csrf
+        
+        <button class="btn btn-danger" type="submit">Supprimer</button>
+
+      </form>
+
+    </div>
+
+    <script>
+      const front = document.getElementById("front");
+
+      const back = document.getElementById("back");
+
+      document.getElementById("flashcard").addEventListener("click", () => {
+        const isFront = front.style.display !== "none";
+        front.style.display = isFront ? "none" : "block";
+        back.style.display = isFront ? "block" : "none";
+      });
+    </script>
+
+  @endsection
