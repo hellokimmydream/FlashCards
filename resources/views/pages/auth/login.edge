@@ -1,0 +1,26 @@
+@component('components/layout', { title: title })
+
+    <h3>
+        Connexion
+    </h3>
+
+    <form action="/login" method="POST">
+
+        <label>
+            Email
+      <input type="email" name="email" required />
+        </label>
+
+        <label>
+            Mot de passe
+      <input type="password" name="password" required />
+        </label>
+
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <p>
+        Pas de compte ?
+    <a href="/register">Créer un compte</a>
+    </p>
+@end

@@ -1,0 +1,37 @@
+@component('components/layout', { title: "Créer une carte" })
+
+    <h3>
+        Créer une carte pour le deck : {{ deck.title }}
+    </h3>
+
+    <form action="/decks/{{ deck.id }}/cards" method="POST">
+        @csrf
+        
+        <div class="field">
+            <label for="front">Côté Recto</label>
+            <input type="text" id="front" name="front" value="{{ old('front') || '' }}" required />
+            @inputError('front')
+                <p class="text-danger">
+                    {{ $messages.join(', ') }}
+                </p>
+            @end
+        </div>
+
+        <div class="field">
+            <label for="back">Côté Verso</label>
+            <textarea id="back" name="back" required>{{ old('back') || '' }}</textarea>
+            @inputError('back')
+                <p class="text-danger">
+                    {{ $messages.join(', ') }}
+                </p>
+            @end
+        </div>
+
+        <button type="submit">Enregistrer la carte</button>
+    </form>
+
+    <p style="margin-top:10px;">
+        <a href="/decks/{{ deck.id }}/cards">Retour aux cartes</a>
+    </p>
+
+@endcomponent

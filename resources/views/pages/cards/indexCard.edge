@@ -1,0 +1,34 @@
+@component('components/layout', { title: "Cartes du deck" })
+
+    <h3>
+        Cartes du deck : {{ deck.title }}
+    </h3>
+
+    <p>
+        <a href="/decks/{{ deck.id }}/cards/create">Créer une nouvelle carte</a>
+        <a href="/decks" style="margin-left:15px;">Retour aux decks</a>
+    </p>
+
+    @if(cards.length === 0)
+        <p>
+            Aucune carte pour le moment.
+        </p>
+    @else
+        <ul>
+            @each(card in cards)
+                <li style="margin-bottom:15px;">
+                    <strong>Recto :</strong>{{ card.front }} <br />
+                    <strong>Verso :</strong>{{ card.back }}
+                    <div style="margin-top:5px; display:flex; gap:8px;">
+                        <a href="/decks/{{ deck.id }}/cards/{{ card.id }}/edit">Modifier</a>
+                        <form action="/decks/{{ deck.id }}/cards/{{ card.id }}/delete" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </div>
+                </li>
+            @end
+        </ul>
+    @end
+    
+@endcomponent

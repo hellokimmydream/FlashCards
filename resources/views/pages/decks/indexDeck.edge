@@ -1,0 +1,39 @@
+@component('components/layout', { title: "Mes decks" })
+
+    <h3>
+        Mes decks
+    </h3>
+
+    <p>
+        <a href="/decks/create">Créer un nouveau deck</a>
+    </p>
+
+    @if(decks.length === 0)
+        <p>
+            Aucun deck pour le moment.
+        </p>
+    @else
+        <ul>
+            @each(deck in decks)
+                <li style="margin-bottom:15px; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                    <strong>{{ deck.title }}</strong>
+                    @if(deck.description)
+                        <div>
+                            {{ deck.description }}
+                        </div>
+                    @end
+                    
+                    <div style="margin-top:5px; display:flex; gap:8px;">
+                        <a href="/decks/{{ deck.id }}/edit">Modifier</a>
+                        <a href="/decks/{{ deck.id }}/cards">Gérer les cartes</a>
+                        <form action="/decks/{{ deck.id }}/delete" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </div>
+                </li>
+            @end
+        </ul>
+    @end
+    
+@endcomponent

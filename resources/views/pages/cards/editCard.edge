@@ -1,0 +1,28 @@
+@component('components/layout', { title: "Modifier une carte" })
+
+    <h3>
+        Modifier la carte dans le deck : {{ deck.title }}
+    </h3>
+
+    <form action="/decks/{{ deck.id }}/cards/{{ card.id }}" method="POST">
+        @csrf
+        @method('PUT')
+
+            <div class="field">
+                <label for="front">Côté Recto</label>
+                <input type="text" id="front" name="front" value="{{ card.front }}" required />
+            </div>
+
+            <div class="field">
+                <label for="back">Côté Verso</label>
+                <textarea id="back" name="back" required>{{ card.back }}</textarea>
+            </div>
+
+            <button type="submit">Mettre à jour la carte</button>
+        </form>
+
+        <p style="margin-top:10px;">
+            <a href="/decks/{{ deck.id }}/cards">Retour aux cartes</a>
+        </p>
+
+    @endcomponent

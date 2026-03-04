@@ -1,0 +1,27 @@
+@if(flashMessages.has('success'))
+    <div class="alert alert-success">
+        {{ old('success') }}
+    </div>
+@end
+
+@if(flashMessages.has('error'))
+    <div class="alert alert-danger">
+        {{ old('error') }}
+    </div>
+@end
+
+@error('E_INVALID_CREDENTIALS')
+    <div class="alert alert-danger">
+        @if($message === "Invalid user credentials")
+            Nom d'utilisateur et/ou mot de passe incorrects
+        @end
+    </div>
+@end
+
+@error('E_UNAUTHORIZED_ACCESS')
+    <div class="alert alert-danger">
+        @if($message === "Unauthorized access")
+            Vous devez être authentifié pour accéder à cette page
+        @end
+    </div>
+@end
