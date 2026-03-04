@@ -2,6 +2,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 import AuthController from '#controllers/auth_controller'
 import DecksController from '#controllers/decks_controller'
+import CardsController from '#controllers/cards_controller'
 
 /**
  * home
@@ -40,4 +41,19 @@ router.group(() => {
 
   // pour réviser cards
   router.get('/decks/:id/learn', [DecksController, 'learn'])
+
+  // cards crud dans un deck
+
+  router.get('/decks/:deckId/cards/create', [CardsController, 'create'])
+
+  router.post('/decks/:deckId/cards', [CardsController, 'store'])
+
+  // showcard retourne la carte
+  router.get('/cards/:id', [CardsController, 'show'])
+
+  router.get('/cards/:id/edit', [CardsController, 'edit'])
+
+  router.post('/cards/:id', [CardsController, 'update'])
+
+  router.post('/cards/:id/delete', [CardsController, 'destroy'])
 })
