@@ -11,6 +11,10 @@
 
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
+import { DateTime } from 'luxon'
+
+import Deck from '#models/deck'
+import Card from '#models/card'
 
 /**
  * URL to the application root. AdonisJS need it to resolve
@@ -43,3 +47,16 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     process.exitCode = 1
     prettyPrintError(error)
   })
+
+Deck.query().delete().then(() => {
+  Card.query()
+    .delete()
+    .then(() => {
+      console.log('Données de test supprimées')
+    })
+})
+
+Card.query()delete().then(() => {
+  console.log('Données de test supprimées')
+})  
+

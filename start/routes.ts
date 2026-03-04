@@ -1,13 +1,12 @@
+// start/routes.ts
 import router from '@adonisjs/core/services/router'
-import { middleware } from '#start/kernel'
-import AuthController from '#controllers/auth_controller'
-import DecksController from '#controllers/decks_controller'
 import CardsController from '#controllers/cards_controller'
+import DecksController from '#controllers/decks_controller'
+import AuthController from '#controllers/auth_controller'
 
 /**
- * home
- * si user est connect on va sur deck
- * sion demmande de login user
+ * Route Home
+ * Redirection vers /decks
  */
 router
   .get('/', async ({ response }) => {
@@ -15,45 +14,36 @@ router
   })
   .as('home')
 
-/** authentification */
-router
-  .group(() => {
-    router.get('/register', [AuthController, 'showRegister'])
-    router.post('/register', [AuthController, 'register'])
+/**
+ * routes d'authentification
+ * Sans middleware guest() pour simplifier
+ */
+router.get('/register', 'AuthController.showRegister')
+router.post('/register', 'AuthController.register')
 
-    router.get('/login', [AuthController, 'showLogin'])
-    router.post('/login', [AuthController, 'login'])
-  })
-  .use(middleware.guest())
+router.get('/login', 'AuthController.showLogin')
+router.post('/login', 'AuthController.login')
 
-router.post('/logout', [AuthController, 'logout']).use(middleware.auth())
+// Déconnexion accessible sans middleware auth() pour simplifier
+router.post('/logout', 'AuthController.logout')
 
-/** deck **/
-router.group(() => {
-  router.get('/decks', [DecksController, 'index'])
-  router.get('/decks/create', [DecksController, 'create'])
-  router.post('/decks', [DecksController, 'store'])
+/**
+ * rouetes CRUD pour les decks et les cartes
+ * Sans middleware auth() pour simplifier
+ */
 
-  router.get('/decks/:id/edit', [DecksController, 'edit'])
-  router.post('/decks/:id', [DecksController, 'update'])
+// DECKS CRUD
+router.get('/decks', 'DecksController.index') // Liste tous les decks
+router.get('/decks/create', 'DecksController.create') // Formulaire création deck
+router.post('/decks', 'DecksController.store') // Création deck
+router.get('/decks/:id/edit', 'DecksController.edit') // Formulaire édition deck
+router.post('/decks/:id', 'DecksController.update') // Mise à jour deck
+router.post('/decks/:id/delete', 'DecksController.destroy') // Suppression deck
+router.get('/decks/:id/learn', 'DecksController.learn') // Révision deck
 
-  router.post('/decks/:id/delete', [DecksController, 'destroy'])
-
-  // pour réviser cards
-  router.get('/decks/:id/learn', [DecksController, 'learn'])
-
-  // cards crud dans un deck
-
-  router.get('/decks/:deckId/cards/create', [CardsController, 'create'])
-
-  router.post('/decks/:deckId/cards', [CardsController, 'store'])
-
-  // showcard retourne la carte
-  router.get('/cards/:id', [CardsController, 'show'])
-
-  router.get('/cards/:id/edit', [CardsController, 'edit'])
-
-  router.post('/cards/:id', [CardsController, 'update'])
-
-  router.post('/cards/:id/delete', [CardsController, 'destroy'])
-})
+// CARDS CRUD (cartes dans un deck)
+router.get('/decks/:deckId/cards/create', 'CardsController.create') // Formulaire création carte
+router.post('/decks/:deckId/cards', 'CardsController.store') // Création carte
+router.get('/decks/:deckId/cards/:id/edit', 'CardsController.edit') // Formulaire édition carte
+router.post('/decks/:deckId/cards/:id', 'CardsController.update') // Mise à jour carte
+router.post('/decks/:deckId/cards/:id/delete', 'CardsController.destroy') // Suppression carte
