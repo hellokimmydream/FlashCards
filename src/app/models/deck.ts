@@ -4,6 +4,7 @@ import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 
 import Card from '#models/card'
+import User from './user.js'
 
 export default class Deck extends BaseModel {
   @column({ isPrimary: true })
@@ -26,4 +27,10 @@ export default class Deck extends BaseModel {
 
   @hasMany(() => Card)
   declare cards: HasMany<typeof Card>
+
+  @belongsTo(() => Deck)
+  declare deck: BelongsTo<typeof Deck>
+
+  @belongsTo(() => User)
+  declare user: BelongsTo<typeof User>
 }
