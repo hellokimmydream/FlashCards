@@ -17,14 +17,6 @@ export default class Deck extends BaseModel {
   @column()
   declare description: string | null
 
-  //@column.dateTime({ autoCreate: true })
-  //declare createdAt: DateTime
-
-  // @column.dateTime({ autoCreate: true, autoUpdate: true })
-  // declare updatedAt: DateTime | null
   @hasMany(() => Card)
   declare cards: HasMany<typeof Card>
-
-  //@belongsTo(() => User)
-  //declare user: BelongsTo<typeof User>
 }

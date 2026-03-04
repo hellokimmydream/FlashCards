@@ -11,14 +11,10 @@
 
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
-import { DateTime } from 'luxon'
-
-import Deck from '#models/deck'
-import Card from '#models/card'
 
 /**
- * URL to the application root. AdonisJS need it to resolve
- * paths to file and directories for scaffolding commands
+ * URL to the application root. AdonisJS needs it to resolve
+ * paths to files and directories for scaffolding commands
  */
 const APP_ROOT = new URL('../', import.meta.url)
 
@@ -33,11 +29,34 @@ const IMPORTER = (filePath: string) => {
   return import(filePath)
 }
 
+/** start adonis serv*/
 new Ignitor(APP_ROOT, { importer: IMPORTER })
   .tap((app) => {
+    // Booting pour charger l'environnement
     app.booting(async () => {
       await import('#start/env')
     })
+
+    // Après que tout est booté, on peut utiliser les modèles
+    app.booted(async () => {
+      // Import dynamique pour s'assurer que Lucid est initialisé
+      const { default: Deck } = await import('#models/deck')
+      // const { default: Card } = await import('#models/card')
+
+      // Ex: afficher tous les decks dans la console
+      try {
+        const decks = await Deck.query().orderBy('id', 'desc')
+        console.log('Decks existants :', decks)
+      } catch (err) {
+        console.error('Erreur lors de la récupération des decks :', err)
+      }
+
+      // Ex: supprimer toutes les cartes
+      // await Card.query().delete()
+      // console.log('Toutes les cartes supprimées')
+    })
+
+    // Gestion des signaux pour arrêter proprement le serveur
     app.listen('SIGTERM', () => app.terminate())
     app.listenIf(app.managedByPm2, 'SIGINT', () => app.terminate())
   })
@@ -47,16 +66,3 @@ new Ignitor(APP_ROOT, { importer: IMPORTER })
     process.exitCode = 1
     prettyPrintError(error)
   })
-
-Deck.query().delete().then(() => {
-  Card.query()
-    .delete()
-    .then(() => {
-      console.log('Données de test supprimées')
-    })
-})
-
-Card.query()delete().then(() => {
-  console.log('Données de test supprimées')
-})  
-
