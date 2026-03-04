@@ -2,22 +2,129 @@
 <html lang="fr">
 
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
         <title>
-            {{ title || "FlashCard Application" }}
-        </title>
-    </head>
+            @!section('title')
+            FlashCards
+        @endsection
+    </title>
 
-    <body>
-        @include('partials/header')
-        @include('partials/flash')
-        <div class="container">
-            {{{ await $slots.main() }}}
-        </div>
-        @include('partials/footer')
-    </body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        header a {
+            text-decoration: none;
+            color: #111;
+            font-weight: bold;
+        }
+        
+        main {
+            padding: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .flash {
+            padding: 10px 12px;
+            border: 1px solid;
+            margin: 12px 0;
+        }
+        
+        .success {
+            border-color: #1b8a3a;
+            color: #1b8a3a;
+        }
+        
+        .error {
+            border-color: #b00020;
+            color: #b00020;
+        }
+        
+        .card {
+            border: 1px solid #333;
+            padding: 12px;
+            margin: 10px 0;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: 1px solid #333;
+            background: #fff;
+            cursor: pointer;
+        }
+        
+        .btn-danger {
+            border-color: #b00020;
+            color: #b00020;
+        }
+        
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #333;
+        }
+        
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .row {
+            margin-top: 10px;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        
+        a.link {
+            color: #0b57d0;
+        }
+    </style>
+</head>
 
+<body>
+    <header>
+        <a href="/decks">FlashCards</a>
+        <a class="link" href="/decks">Mes decks</a>
+        <a class="link" href="/decks/create">Nouveau deck</a>
+    </header>
+
+    <main>
+        {{-- Flash messages success --}}
+        @if (session.has('Réussite'))
+            <div class="flash success">
+                {{ session.get('Réussite') }}
+            </div>
+        @endif
+        
+        {{-- Flash messages error --}}
+        @if (session.has('Erreur'))
+            <div class="flash error">
+                {{ session.get('Erreur') }}
+            </div>
+        @endif
+        
+        {{-- Section du contenu de la page --}}
+        @!section('content')
+    @endsection
+</main>
+</body>
 </html>

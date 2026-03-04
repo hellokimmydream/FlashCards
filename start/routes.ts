@@ -1,43 +1,22 @@
-import router from '@adonisjs/core/services/router'
-import { middleware } from '#start/kernel'
-import AuthController from '#controllers/auth_controller'
+import Route from '@adonisjs/core/services/router'
 import DecksController from '#controllers/decks_controller'
+import CardsController from '#controllers/cards_controller'
 
-/**
- * home
- * si user est connect on va sur deck
- * sion demmande de login user
- */
-router
-  .get('/', async ({ response }) => {
-    return response.redirect('/decks')
-  })
-  .as('home')
+// Accueil qui va vers la liste des decks
+Route.get('/', async ({ response }) => response.redirect('/decks'))
 
-/** authentification */
-router
-  .group(() => {
-    router.get('/register', [AuthController, 'showRegister'])
-    router.post('/register', [AuthController, 'register'])
+// decks crud
+Route.get('/decks', [DecksController, 'index'])
+Route.get('/decks/create', [DecksController, 'create'])
+Route.post('/decks', [DecksController, 'store'])
+Route.get('/decks/:id/edit', [DecksController, 'edit'])
+Route.post('/decks/:id/update', [DecksController, 'update'])
+Route.post('/decks/:id/delete', [DecksController, 'destroy'])
 
-    router.get('/login', [AuthController, 'showLogin'])
-    router.post('/login', [AuthController, 'login'])
-  })
-  .use(middleware.guest())
-
-router.post('/logout', [AuthController, 'logout']).use(middleware.auth())
-
-/** deck **/
-router.group(() => {
-  router.get('/decks', [DecksController, 'index'])
-  router.get('/decks/create', [DecksController, 'create'])
-  router.post('/decks', [DecksController, 'store'])
-
-  router.get('/decks/:id/edit', [DecksController, 'edit'])
-  router.post('/decks/:id', [DecksController, 'update'])
-
-  router.post('/decks/:id/delete', [DecksController, 'destroy'])
-
-  // pour réviser cards
-  router.get('/decks/:id/learn', [DecksController, 'learn'])
-})
+// cards crud
+Route.get('/decks/:deckId/cards/create', [CardsController, 'create'])
+Route.post('/decks/:deckId/cards', [CardsController, 'store'])
+Route.get('/cards/:id/edit', [CardsController, 'edit'])
+Route.post('/cards/:id/update', [CardsController, 'update'])
+Route.post('/cards/:id/delete', [CardsController, 'destroy'])
+Route.get('/decks/:deckId/learn', [CardsController, 'learn'])
